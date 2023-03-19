@@ -1,41 +1,31 @@
-import FormHeading from '@/components/FormHeading'
-import PlanCard from '@/components/PlanCard'
-import FormWrapper from '@/components/FormWrapper'
+'use client'
 import Stepper from '@/components/Stepper'
 import StepButtons from '@/components/StepButtons'
+import useStepHandler from '@/hooks/useStepHandler'
+import Plans from './steps/Plans'
+import AddOns from './steps/AddOns'
 
 export default function Home() {
+  const {
+    Step,
+    nextStep,
+    backStep,
+    isFirstStep,
+    isLastStep,
+    currentStepIndex,
+    steps,
+  } = useStepHandler([<AddOns key={0} />, <Plans key={1} />])
+
   return (
     <main>
-      <Stepper />
-      <FormWrapper>
-        <FormHeading level="h1" text="Select your plan" />
-        <FormHeading
-          level="h2"
-          text="You have the option of monthly or yearly billing."
-        />
-
-        <PlanCard
-          marked="active"
-          icon="plan-icon-arcade.svg"
-          name="arcade"
-          planValue="aoba"
-        />
-        <PlanCard
-          marked="active"
-          icon="plan-icon-arcade.svg"
-          name="arcade"
-          planValue="aoba"
-        />
-        <PlanCard
-          marked="active"
-          icon="plan-icon-arcade.svg"
-          name="arcade"
-          planValue="aoba"
-        />
-      </FormWrapper>
-
-      <StepButtons />
+      <Stepper activeIndex={currentStepIndex} arraySteps={steps} />
+      <Step />
+      <StepButtons
+        isFirstStep={isFirstStep}
+        isLastStep={isLastStep}
+        onBack={backStep}
+        onNext={nextStep}
+      />
     </main>
   )
 }

@@ -2,8 +2,11 @@
 
 import theme from '@/styles/theme'
 import styled from 'styled-components'
+import { StepButtonsProps } from '.'
 
-export const Wrapper = styled.div`
+type WrapperProps = Pick<StepButtonsProps, 'isFirstStep'>
+
+export const Wrapper = styled.div<WrapperProps>`
   height: 72px;
   width: 100vw;
   padding: 16px;
@@ -14,7 +17,9 @@ export const Wrapper = styled.div`
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.0951141);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  justify-content: ${(props) =>
+    props.isFirstStep ? 'flex-end' : 'space-between'};
 `
 
 export const BackButton = styled.button`
