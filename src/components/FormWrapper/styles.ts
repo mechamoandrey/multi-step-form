@@ -15,6 +15,7 @@ export const Wrapper = styled.section`
   position: relative;
   max-height: calc(100vh - 195px);
   overflow-y: scroll;
+  transition: height 200ms ease-in-out;
 
   ${media.greaterThan('medium')`
     width: unset;

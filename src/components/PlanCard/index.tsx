@@ -4,22 +4,24 @@ import * as S from './styles'
 export type PlanCardProps = {
   name: string
   planValue: string
-  planAdvice?: string
   icon: string
-  marked?: 'active'
+  marked?: 'active' | false
   alt?: string
+  isYearly: Boolean
+  onClick: Function
 }
 
 const PlanCard = ({
   name,
   planValue,
-  planAdvice,
   icon,
   marked,
   alt = '',
+  isYearly = false,
+  onClick,
 }: PlanCardProps) => {
   return (
-    <S.Wrapper marked={marked}>
+    <S.Wrapper onClick={() => onClick()} marked={marked}>
       <S.WrapperIcon>
         <Image
           src={`/${icon}`}
@@ -32,8 +34,11 @@ const PlanCard = ({
       </S.WrapperIcon>
       <div>
         <S.Name>{name}</S.Name>
-        <S.PlanValue>{planValue}</S.PlanValue>
-        {planAdvice && <S.PlanAdvice>{planAdvice}</S.PlanAdvice>}
+        <S.PlanValue>
+          ${planValue}
+          {isYearly ? '0/yr' : '/mo'}
+        </S.PlanValue>
+        {isYearly && <S.PlanAdvice>2 months free</S.PlanAdvice>}
       </div>
     </S.Wrapper>
   )

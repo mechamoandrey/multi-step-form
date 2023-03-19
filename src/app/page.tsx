@@ -14,7 +14,7 @@ export default function Home() {
     isLastStep,
     currentStepIndex,
     steps,
-  } = useStepHandler([<AddOns key={0} />, <Plans key={1} />])
+  } = useStepHandler([<AddOns key={0} />, <Plans key={1} />, <Plans key={2} />])
 
   return (
     <main>
